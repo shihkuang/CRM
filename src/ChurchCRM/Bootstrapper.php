@@ -105,7 +105,8 @@ namespace ChurchCRM
 
           $localeInfo = Bootstrapper::GetCurrentLocale();
           self::$bootStrapLogger->debug("Setting locale to: " . $localeInfo->getLocale());
-          setlocale(LC_ALL, $localeInfo->getLocale());
+          // try different possible locale names using postfix for language 
+          setlocale(LC_ALL, $localeInfo->getLocale(), $localeInfo->getLocale().'.UTF-8', $localeInfo->getLocale().'.utf8');
 
           // Get numeric and monetary locale settings.
           $aLocaleInfo = $localeInfo->getLocaleInfo();
